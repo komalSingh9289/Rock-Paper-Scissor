@@ -22,12 +22,29 @@ function playRound(playerSelection, computerSelection){
         return `You lose! ${computerSelection} beats ${playerSelection}.`;
     }
 }
+let userScore = 0;
+let computerScore = 0;
+
+function updateUserScore(score) {
+    userScore += score;
+    document.getElementById('user-score').textContent = userScore;
+}
+function updateComputerScore(score) {
+    computerScore += score;
+    document.getElementById('computer-score').textContent = computerScore;
+}
 
 function playGame(playerChoice) {
     const computerChoice = computerPlay();
 
     const result = playRound(playerChoice, computerChoice);
      displayResult(computerChoice, result);
+ 
+    if (result.includes('win')) {
+        updateUserScore(1);
+    } else if (result.includes('lose')) {
+        updateComputerScore(1);
+    }
 }
 
 function displayResult(computerChoice,result){
